@@ -1,0 +1,2598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sparkplug Academy | Mathematics Curriculum</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-bg: #f0f2f9;
+        --accent-purple: #7b42f6; /* Based on Logo */
+        --dark-purple: #2d1b69;
+        --light-purple: #e8dffc;
+        --white: #ffffff;
+        --text-main: #333;
+        --text-muted: #666;
+        --shadow: 0 10px 30px rgba(123, 66, 246, 0.1);
+        --transition: all 0.3s ease;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+      }
+
+      body {
+        background-color: var(--primary-bg);
+        color: var(--text-main);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      /* --- Navigation --- */
+      nav {
+        background: var(--white);
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+      }
+
+      .logo {
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--accent-purple);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo img {
+        max-height: 50px;
+        width: auto;
+        display: block;
+      }
+
+      /* --- Hero Section --- */
+      .hero {
+        padding: 60px 5%;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--dark-purple),
+          var(--accent-purple)
+        );
+        color: var(--white);
+        margin-bottom: 40px;
+      }
+
+      .hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+      }
+      .hero p {
+        opacity: 0.9;
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      /* --- Curriculum Filter (Tabs) --- */
+      .filter-container {
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        padding: 0 5%;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+      }
+
+      .tab-btn {
+        padding: 12px 24px;
+        border: none;
+        background: var(--white);
+        border-radius: 50px;
+        cursor: pointer;
+        font-weight: 600;
+        color: var(--accent-purple);
+        box-shadow: var(--shadow);
+        transition: var(--transition);
+      }
+
+      .tab-btn.active,
+      .tab-btn:hover {
+        background: var(--accent-purple);
+        color: var(--white);
+        transform: translateY(-3px);
+      }
+
+      /* --- Main Content Layout --- */
+      .curriculum-container {
+        max-width: 1000px;
+        margin: 0 auto 100px;
+        padding: 0 5%;
+      }
+
+      .course-header {
+        margin-bottom: 30px;
+        animation: fadeIn 0.8s ease;
+      }
+
+      /* --- Wave Accordion --- */
+      .wave-item {
+        background: var(--white);
+        border-radius: 15px;
+        margin-bottom: 20px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .wave-trigger {
+        padding: 20px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        background: var(--white);
+        transition: var(--transition);
+      }
+
+      .wave-trigger:hover {
+        background: #fafaff;
+      }
+
+      .wave-title-group h3 {
+        color: var(--dark-purple);
+        font-size: 1.2rem;
+      }
+
+      .wave-trigger i {
+        color: var(--accent-purple);
+        transition: transform 0.4s;
+      }
+
+      .wave-item.active .wave-trigger i {
+        transform: rotate(180deg);
+      }
+
+      .wave-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+        background: #f9f9ff;
+      }
+
+      .wave-item.active .wave-content {
+        max-height: 2000px;
+        transition: max-height 1s ease-in-out;
+        padding: 20px;
+      }
+
+      /* --- Session Cards --- */
+      .session-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+
+      .session-card {
+        background: var(--white);
+        padding: 20px;
+        border-radius: 10px;
+        border-left: 5px solid var(--accent-purple);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      }
+
+      .session-card h4 {
+        color: var(--accent-purple);
+        margin-bottom: 8px;
+      }
+      .session-card p {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+        margin-bottom: 12px;
+      }
+      .assignment-box {
+        background: var(--light-purple);
+        padding: 10px 15px;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        color: var(--dark-purple);
+        display: flex;
+        gap: 10px;
+        align-items: center;
+      }
+
+      /* --- Animations --- */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 1.8rem;
+        }
+        .tab-btn {
+          width: 100%;
+          text-align: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="logo">
+        <img src="Logo.png" alt="Sparkplug Academy" />
+      </div>
+    </nav>
+
+    <section class="hero">
+      <h1>Mathematics Mastery</h1>
+      <p>
+        Empowering the next generation of thinkers through a structured,
+        repetitive, and deeply logical curriculum tailored for every age group.
+      </p>
+    </section>
+
+    <div class="filter-container">
+      <button class="tab-btn active" onclick="loadCourse(0)">Ages 5-6</button>
+      <button class="tab-btn" onclick="loadCourse(1)">Ages 7-8</button>
+      <button class="tab-btn" onclick="loadCourse(2)">Ages 9-10</button>
+      <button class="tab-btn" onclick="loadCourse(3)">Ages 11-12</button>
+      <button class="tab-btn" onclick="loadCourse(4)">Ages 13-14</button>
+      <button class="tab-btn" onclick="loadCourse(5)">Ages 15-16</button>
+      <button class="tab-btn" onclick="loadCourse(6)">Ages 17-18</button>
+    </div>
+
+    <main class="curriculum-container" id="curriculum-view"></main>
+
+    <script>
+      const curriculumData = [
+        {
+          name: "Foundations of Number Sense",
+          age: "5-6",
+          description:
+            "An intensive, mastery-based curriculum for ages 5–6. By utilizing 10 sessions per wave, this course ensures deep cognitive anchoring of mathematical concepts through tactile exploration and high-frequency repetition.",
+          waves: [
+            {
+              name: "Wave 1: Building the Number Core (1–10)",
+              description:
+                "A deep dive into the first decade of numbers, focusing on recognition, formation, and the cardinal value of numbers.",
+              sessions: [
+                {
+                  name: "The Trio: 1, 2, and 3",
+                  desc: "Introduction to the visual symbols and physical quantities of 1, 2, and 3.",
+                  assign:
+                    "Gather sets of 1, 2, and 3 toys and place them next to their written numeral.",
+                },
+                {
+                  name: "The Growth: 4 and 5",
+                  desc: "Extending counting to 5 and introducing the 'high-five' as a visual anchor for five.",
+                  assign:
+                    "Trace numbers 4 and 5 in a tray of colorful sand or salt.",
+                },
+                {
+                  name: "One-to-One Mastery",
+                  desc: "Practicing the physical act of touching one object for every one number spoken.",
+                  assign:
+                    "Move 5 buttons from one jar to another while counting slowly.",
+                },
+                {
+                  name: "The Anchor of 5",
+                  desc: "Using a five-frame to visualize how numbers 1-4 relate to the number 5.",
+                  assign:
+                    "Place stickers on a 5-frame to show different numbers.",
+                },
+                {
+                  name: "Crossing Five: 6 and 7",
+                  desc: "Introducing 6 and 7 as 'five and some more'.",
+                  assign:
+                    "Draw 6 stars and 7 hearts on a large piece of paper.",
+                },
+                {
+                  name: "Reaching Higher: 8 and 9",
+                  desc: "Learning the shapes of 8 and 9 and their place in the sequence.",
+                  assign: "Build a tower of 8 blocks and a tower of 9 blocks.",
+                },
+                {
+                  name: "The Goal of 10",
+                  desc: "Introduction to the concept of ten and the 'Ten Frame'.",
+                  assign:
+                    "Fill every slot in a 10-frame egg carton with small stones.",
+                },
+                {
+                  name: "The Mystery of Zero",
+                  desc: "Understanding that zero represents an empty set or 'none'.",
+                  assign:
+                    "Identify three containers in the room that have 'zero' items inside.",
+                },
+                {
+                  name: "Writing 1 to 10",
+                  desc: "Guided practice in the correct stroke order for numerals 1-10.",
+                  assign:
+                    "Complete a rainbow-writing sheet where each number is traced in 5 different colors.",
+                },
+                {
+                  name: "Sequence Sprint",
+                  desc: "Practicing the forward and backward sequence of 1-10 through song.",
+                  assign:
+                    "Record a video or perform the '10 to 1 Rocket Blast-off' countdown.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Relational Logic and Comparisons",
+              description:
+                "Developing the ability to see relationships between quantities and the geometry of shapes.",
+              sessions: [
+                {
+                  name: "Visual Estimation: More",
+                  desc: "Using 'eyes only' to guess which group of objects is larger.",
+                  assign:
+                    "Point to the pile of blocks that has 'more' before counting to check.",
+                },
+                {
+                  name: "Visual Estimation: Less",
+                  desc: "Identifying the smaller group of objects in various pairings.",
+                  assign:
+                    "Choose the plate with 'less' snacks to give to a small toy.",
+                },
+                {
+                  name: "Finding the Equal",
+                  desc: "Understanding that 'equal' means the exact same amount.",
+                  assign:
+                    "Match sets of objects so that both sides have an equal number.",
+                },
+                {
+                  name: "Subitizing 1–3",
+                  desc: "Recognizing small groups of items instantly without counting.",
+                  assign:
+                    "Identify the number of fingers shown by a partner in under 1 second.",
+                },
+                {
+                  name: "Subitizing 4–5",
+                  desc: "Recognizing dice patterns and finger patterns for 4 and 5.",
+                  assign:
+                    "Play a dice game and call out the number shown without counting dots.",
+                },
+                {
+                  name: "Sorting by One Attribute",
+                  desc: "Categorizing items based on a single rule like 'color'.",
+                  assign:
+                    "Sort a bag of mixed socks into piles based on their color.",
+                },
+                {
+                  name: "Sorting by Two Attributes",
+                  desc: "Increasing complexity by sorting by color AND size.",
+                  assign: "Find all the 'Big Red' blocks in a bin.",
+                },
+                {
+                  name: "The Round World: Circles",
+                  desc: "Identifying circles and understanding they have no corners.",
+                  assign: "Go on a hunt for 5 'Circle' shapes in the kitchen.",
+                },
+                {
+                  name: "The Pointy World: Triangles",
+                  desc: "Identifying triangles and counting their three sides and corners.",
+                  assign: "Use three popsicle sticks to create a triangle.",
+                },
+                {
+                  name: "Four Sides: Squares and Rectangles",
+                  desc: "Differentiating between squares and rectangles based on side length.",
+                  assign:
+                    "Identify 2 squares and 2 rectangles in the living room.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Patterns, Space, and Measurement",
+              description:
+                "Exploring how numbers apply to physical dimensions and predictable sequences.",
+              sessions: [
+                {
+                  name: "ABAB Color Patterns",
+                  desc: "Identifying and extending the simplest form of sequencing.",
+                  assign:
+                    "Create a paper chain using a Red-Blue-Red-Blue pattern.",
+                },
+                {
+                  name: "ABC Patterns",
+                  desc: "Increasing difficulty by adding a third element to the sequence.",
+                  assign:
+                    "Use 3 different fruits to make a patterned snack skewer.",
+                },
+                {
+                  name: "Action Sequences",
+                  desc: "Using the body to perform rhythmic patterns (Clap, Clap, Stomp).",
+                  assign: "Teach a 3-step action pattern to a family member.",
+                },
+                {
+                  name: "Fix the Pattern",
+                  desc: "Identifying and correcting a 'broken' sequence.",
+                  assign:
+                    "Look at a row of blocks with one mistake and fix it.",
+                },
+                {
+                  name: "Positional Play: Top/Bottom",
+                  desc: "Understanding spatial relationship words.",
+                  assign:
+                    "Put a hat 'on top' of your head and shoes 'on the bottom' of your feet.",
+                },
+                {
+                  name: "Positional Play: In/Out/Beside",
+                  desc: "Practicing complex positional directions.",
+                  assign:
+                    "Place a toy 'inside' a box, then move it 'beside' the box.",
+                },
+                {
+                  name: "Length: Long and Short",
+                  desc: "Comparing the physical length of objects.",
+                  assign: "Find the longest and shortest spoon in the drawer.",
+                },
+                {
+                  name: "Height: Tall and Short",
+                  desc: "Measuring vertical distance using non-standard units.",
+                  assign:
+                    "Measure how many 'blocks tall' your favorite book is.",
+                },
+                {
+                  name: "Weight: Heavy and Light",
+                  desc: "Using hands as a scale to feel mass.",
+                  assign:
+                    "Find something 'heavy' like a book and something 'light' like a feather.",
+                },
+                {
+                  name: "Capacity: Full and Empty",
+                  desc: "Exploring volume through water or sand play.",
+                  assign:
+                    "Fill a cup to the top (Full), then pour out half (Half-Full).",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Time, Teens, and Mastery",
+              description:
+                "Finalizing the foundation by looking at the rhythm of the day and numbers up to 20.",
+              sessions: [
+                {
+                  name: "Day and Night",
+                  desc: "Recognizing the sun and moon as markers of time.",
+                  assign: "Draw a picture of what you do when the sun is up.",
+                },
+                {
+                  name: "Daily Routines",
+                  desc: "Sequencing events like breakfast, lunch, and dinner.",
+                  assign:
+                    "Put three cards (Wake up, Eat, Sleep) in the correct order.",
+                },
+                {
+                  name: "Days of the Week",
+                  desc: "Introduction to the names of the seven days.",
+                  assign:
+                    "Learn the 'Days of the Week' song and identify 'Today'.",
+                },
+                {
+                  name: "Introduction to 11 and 12",
+                  desc: "Starting the 'teen' sequence with these unique names.",
+                  assign: "Count 12 cereal pieces into a bowl.",
+                },
+                {
+                  name: "Teen Counting: 13, 14, 15",
+                  desc: "Focusing on the 'teen' sound and the idea of 10+3, 10+4, etc.",
+                  assign:
+                    "Build a tower of 10 blocks and add 5 more to make 15.",
+                },
+                {
+                  name: "Teen Counting: 16, 17, 18",
+                  desc: "Reinforcing the pattern of the high teens.",
+                  assign: "Find the numbers 16, 17, and 18 on a calendar.",
+                },
+                {
+                  name: "The Big 20",
+                  desc: "Reaching the milestone of twenty.",
+                  assign:
+                    "Perform 20 star jumps while counting each one out loud.",
+                },
+                {
+                  name: "Number Lines 1–20",
+                  desc: "Visualizing the long string of numbers in order.",
+                  assign: "Walk along a number line on the floor from 1 to 20.",
+                },
+                {
+                  name: "The Great Sorting Review",
+                  desc: "A comprehensive review of sorting, shapes, and counting.",
+                  assign:
+                    "Sort all your toys by size, then count how many are in the 'Small' pile.",
+                },
+                {
+                  name: "Number Sense Graduation",
+                  desc: "Final celebration of skills through a series of fun math games.",
+                  assign:
+                    "Complete the 'Foundations Challenge' and receive a printed certificate.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Logical Operations and Place Value",
+          age: "7-8",
+          description:
+            "A comprehensive curriculum for ages 7–8. This course bridges the gap between simple counting and abstract operational logic using the base-10 system as a foundation.",
+          waves: [
+            {
+              name: "Wave 1: Numbers, Estimation, and Place Value",
+              description:
+                "Mastering the number system up to 100 and understanding the physical and abstract value of 'Tens' and 'Ones'.",
+              sessions: [
+                {
+                  name: "Counting to 50",
+                  desc: "Mastering the number sequence and crossing the 'decade' boundaries (e.g., 29 to 30).",
+                  assign: "Fill in a partial 1-50 grid with missing numbers.",
+                },
+                {
+                  name: "The Road to 100",
+                  desc: "Exploring numbers 50-100 and recognizing the repetitive nature of the digits.",
+                  assign: "Count out 100 small items into groups of 10.",
+                },
+                {
+                  name: "Estimation Stations",
+                  desc: "Learning to 'guess' quantities using visual benchmarks of 10 and 50.",
+                  assign:
+                    "Estimate if a jar has more or less than 50 marbles, then count to check.",
+                },
+                {
+                  name: "Number Lines to 100",
+                  desc: "Visualizing relative position and distance between larger numbers.",
+                  assign: "Mark where '75' belongs on a 0-100 blank line.",
+                },
+                {
+                  name: "Skip Counting by 10s and 5s",
+                  desc: "Building rhythmic fluency to prepare for multiplication.",
+                  assign: "Practice counting by 10s while doing jumping jacks.",
+                },
+                {
+                  name: "Bundling Tens",
+                  desc: "Physically creating groups of ten to see '1 ten' as a single unit.",
+                  assign:
+                    "Create 3 'tens bundles' and 4 'ones' and name the number (34).",
+                },
+                {
+                  name: "Tens and Ones Charts",
+                  desc: "Translating physical bundles into T-chart notation.",
+                  assign:
+                    "Draw 47 using 'sticks' for tens and 'dots' for ones.",
+                },
+                {
+                  name: "Comparing 2-Digit Numbers",
+                  desc: "Using place value logic to determine 'greater than' or 'less than'.",
+                  assign:
+                    "Compare pairs of numbers like 23 and 32 using <, >, or =.",
+                },
+                {
+                  name: "Introduction to Hundreds",
+                  desc: "Seeing ten 'tens' transform into a hundred block.",
+                  assign: "Build the number 105 using place value blocks.",
+                },
+                {
+                  name: "Expanded Form",
+                  desc: "Decomposing numbers into their value components (e.g., 52 = 50 + 2).",
+                  assign:
+                    "Write the expanded form for 10 different 2-digit numbers.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Mastery of Addition and Subtraction",
+              description:
+                "Developing operational fluency through number bonds, mental strategies, and formal column methods.",
+              sessions: [
+                {
+                  name: "Number Bonds to 20",
+                  desc: "Developing instant recall of addition pairs up to 20.",
+                  assign:
+                    "Timed challenge: How many ways can you make 20 in one minute?",
+                },
+                {
+                  name: "Adding 1-Digit to 2-Digits",
+                  desc: "Practicing the 'counting on' strategy for larger numbers.",
+                  assign:
+                    "Use a number line to jump forward from a 2-digit starting point.",
+                },
+                {
+                  name: "Double Trouble",
+                  desc: "Using 'Doubles' and 'Near Doubles' (e.g., 6+7) as mental shortcuts.",
+                  assign: "Create a 'Doubles' poster with drawings.",
+                },
+                {
+                  name: "Adding Tens",
+                  desc: "Understanding that adding 10 only changes the tens digit.",
+                  assign:
+                    "Solve 10 problems where only the 'tens' digit changes.",
+                },
+                {
+                  name: "Column Addition (No Regrouping)",
+                  desc: "Learning the vertical alignment of tens and ones.",
+                  assign: "Solve 22 + 15 using the vertical column method.",
+                },
+                {
+                  name: "Subtraction as Taking Away",
+                  desc: "Removing physical items to find a remainder.",
+                  assign: "Use physical counters to solve 18 - 5.",
+                },
+                {
+                  name: "Subtraction as Difference",
+                  desc: "Finding the 'gap' between two numbers by comparing them.",
+                  assign:
+                    "Measure two block towers and subtract the smaller from the larger.",
+                },
+                {
+                  name: "Counting Backwards",
+                  desc: "Mental subtraction using number line visualizations.",
+                  assign: "Solve 55 - 3 by counting back in your head.",
+                },
+                {
+                  name: "Subtracting Multiples of 10",
+                  desc: "Applying place value to take away tens quickly.",
+                  assign: "Use a 100-square to move up rows (subtracting 10s).",
+                },
+                {
+                  name: "The Inverse Relationship",
+                  desc: "Proving that addition and subtraction are opposites.",
+                  assign:
+                    "Write the 'Fact Family' for the numbers 3, 5, and 8.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Multiplicative Thinking and Fractions",
+              description:
+                "Transitioning from addition to groups, sharing, and understanding parts of a whole.",
+              sessions: [
+                {
+                  name: "Equal Groups",
+                  desc: "Learning that multiplication is about 'groups of' equal sizes.",
+                  assign:
+                    "Draw 3 nests with 2 eggs in each. How many eggs in total?",
+                },
+                {
+                  name: "Repeated Addition",
+                  desc: "Linking 2+2+2 to the multiplication sentence 3 x 2.",
+                  assign: "Convert 5 + 5 + 5 into a multiplication sentence.",
+                },
+                {
+                  name: "Intro to Arrays",
+                  desc: "Visualizing multiplication through rows and columns.",
+                  assign: "Use stickers to make a 2x4 array.",
+                },
+                {
+                  name: "Division as Sharing",
+                  desc: "Fairly distributing items between people/groups.",
+                  assign: "Share 12 cookies between 3 friends fairly.",
+                },
+                {
+                  name: "Division as Grouping",
+                  desc: "Finding how many groups of a certain size exist in a total.",
+                  assign: "How many groups of 2 can you make out of 10 socks?",
+                },
+                {
+                  name: "Halves (1/2)",
+                  desc: "The logic of dividing one whole into two equal parts.",
+                  assign:
+                    "Fold a paper circle exactly in half and color one side.",
+                },
+                {
+                  name: "Quarters (1/4)",
+                  desc: "Dividing a whole into four equal pieces.",
+                  assign: "Slice a play-dough pizza into four equal quarters.",
+                },
+                {
+                  name: "Fraction of a Set",
+                  desc: "Applying fractions to groups of objects (e.g., half of 6).",
+                  assign: "If you have 8 candies, how many is half?",
+                },
+                {
+                  name: "Identifying Fractions",
+                  desc: "Recognizing shaded portions of geometric shapes.",
+                  assign: "Circle the shapes that are exactly half-shaded.",
+                },
+                {
+                  name: "Equal vs Unequal Parts",
+                  desc: "Mastering the rule that fractions must be equal in size.",
+                  assign: "Identify 'fair' and 'unfair' slices in a drawing.",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Practical Math, Time, and Measurement",
+              description:
+                "Using math in the real world to handle money, tell time, and measure space.",
+              sessions: [
+                {
+                  name: "Recognizing Coins",
+                  desc: "Identifying currency by size, color, and value.",
+                  assign:
+                    "Do coin rubbings with a pencil and label their values.",
+                },
+                {
+                  name: "Making Amounts",
+                  desc: "Combining coins to reach a target price.",
+                  assign: "Find two different ways to make 20 cents/pence.",
+                },
+                {
+                  name: "Simple Addition of Money",
+                  desc: "Adding the cost of multiple items.",
+                  assign:
+                    "Total the cost of an apple (10c) and a banana (15c).",
+                },
+                {
+                  name: "Giving Change",
+                  desc: "Learning subtraction through store transactions.",
+                  assign:
+                    "If an item costs 8c and you pay 10c, how much change is left?",
+                },
+                {
+                  name: "The Classroom Shop",
+                  desc: "A roleplay exercise for financial literacy.",
+                  assign:
+                    "Act as the shopkeeper and calculate totals for 'customers'.",
+                },
+                {
+                  name: "The Face of the Clock",
+                  desc: "Understanding the layout of the analog clock.",
+                  assign:
+                    "Draw the numbers on a blank clock face in the correct spots.",
+                },
+                {
+                  name: "O'Clock and Half-Past",
+                  desc: "Reading the two most common time intervals.",
+                  assign: "Set a toy clock to show 4:00 and 4:30.",
+                },
+                {
+                  name: "Measuring in Centimeters",
+                  desc: "Introduction to precision measurement using rulers.",
+                  assign: "Measure the length of your thumb in cm.",
+                },
+                {
+                  name: "Comparing Capacity (Liters)",
+                  desc: "Exploring how much liquid containers can hold.",
+                  assign: "Find a container that holds more than 1 liter.",
+                },
+                {
+                  name: "Reading Temperatures",
+                  desc: "Using number lines in a vertical format (thermometers).",
+                  assign:
+                    "Check the weather report and draw the thermometer level.",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Geometry, Data, and Problem Solving",
+              description:
+                "Exploring 3D shapes, analyzing data sets, and tackling logical word problems.",
+              sessions: [
+                {
+                  name: "3D Shapes: Spheres and Cubes",
+                  desc: "Identifying non-flat shapes in the real world.",
+                  assign:
+                    "Find a real-life object that is a sphere (like a ball).",
+                },
+                {
+                  name: "Faces, Edges, and Vertices",
+                  desc: "Counting the components of 3D objects.",
+                  assign: "How many flat faces does a cereal box have?",
+                },
+                {
+                  name: "Intro to Symmetry",
+                  desc: "Exploring the 'mirror' concept in shapes.",
+                  assign:
+                    "Paint half a butterfly, fold the paper, and press to see the symmetry.",
+                },
+                {
+                  name: "Moving and Turning",
+                  desc: "Introduction to directional language (Left, Right, Quarter-turn).",
+                  assign:
+                    "Give a friend 'robot directions' to walk to the door.",
+                },
+                {
+                  name: "Sorting 3D Shapes",
+                  desc: "Classifying objects by their physical movement (roll vs. slide).",
+                  assign:
+                    "Test objects on a ramp to see if they roll or slide.",
+                },
+                {
+                  name: "Tally Charts",
+                  desc: "The first step in data collection and recording.",
+                  assign: "Tally the colors of shirts in the room.",
+                },
+                {
+                  name: "Reading Pictograms",
+                  desc: "Interpreting data using visual icons.",
+                  assign:
+                    "Answer: 'Which fruit was most popular?' based on a pictogram.",
+                },
+                {
+                  name: "Introduction to Word Problems",
+                  desc: "Decoding stories to find the hidden math equation.",
+                  assign:
+                    "Solve: 'Sam had 12 apples, he ate 3. How many are left?'",
+                },
+                {
+                  name: "Multi-Step Logic",
+                  desc: "Tackling problems that require more than one calculation.",
+                  assign:
+                    "Solve: 'I have 5 red cars and 5 blue cars. I lose 2. How many now?'",
+                },
+                {
+                  name: "Course Finale: Math Mystery",
+                  desc: "Applying every skill learned to solve a final logical puzzle.",
+                  assign:
+                    "Solve a series of math riddles to find a hidden treat.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Multi-digit Operations and Fractional Foundations",
+          age: "9-10",
+          description:
+            "An expanded mastery curriculum for ages 9–10. This course transitions students from basic arithmetic to multi-digit fluency, fractional reasoning, and the formal measurement of the physical world.",
+          waves: [
+            {
+              name: "Wave 1: Advanced Arithmetic and Place Value Logic",
+              description:
+                "Mastering multi-digit addition and subtraction through the standard algorithm and mental estimation strategies.",
+              sessions: [
+                {
+                  name: "Addition with Regrouping",
+                  desc: "Reviewing place value to carry digits into the tens and hundreds place.",
+                  assign:
+                    "Solve 10 addition problems involving 3-digit numbers.",
+                },
+                {
+                  name: "Subtraction with Borrowing",
+                  desc: "Learning to 'exchange' values from the next column when the top digit is smaller.",
+                  assign:
+                    "Complete a subtraction 'maze' using 3-digit numbers.",
+                },
+                {
+                  name: "Subtraction across Zeros",
+                  desc: "The specific challenge of borrowing when there are multiple zeros (e.g., 1000 - 456).",
+                  assign:
+                    "Practice 5 problems specifically involving subtracting from 1,000.",
+                },
+                {
+                  name: "Estimating Sums and Differences",
+                  desc: "Rounding to the nearest 10 or 100 to check if an answer is reasonable.",
+                  assign:
+                    "Estimate the total cost of 5 grocery items before calculating the exact sum.",
+                },
+                {
+                  name: "Inverse Operations Review",
+                  desc: "Using addition to check subtraction accuracy and vice versa.",
+                  assign:
+                    "Solve a subtraction problem and prove it's correct using addition.",
+                },
+                {
+                  name: "4-Digit Addition Mastery",
+                  desc: "Expanding regrouping skills to the thousands and ten-thousands place.",
+                  assign:
+                    "Calculate the total population of two small towns using 4-digit addition.",
+                },
+                {
+                  name: "4-Digit Subtraction Mastery",
+                  desc: "Applying multiple exchanges in larger subtraction problems.",
+                  assign:
+                    "Solve a series of 'Bank Account' puzzles involving 4-digit withdrawals.",
+                },
+                {
+                  name: "Mental Math: Addition Shortcuts",
+                  desc: "Using 'compensation' (e.g., adding 99 by adding 100 and taking 1) to solve problems quickly.",
+                  assign:
+                    "Solve 10 mental math problems using the compensation strategy.",
+                },
+                {
+                  name: "Mental Math: Subtraction Shortcuts",
+                  desc: "Using the 'counting up' method to find the difference mentally.",
+                  assign:
+                    "Find the change from $100 for various items without using paper.",
+                },
+                {
+                  name: "Wave 1 Arithmetic Challenge",
+                  desc: "A comprehensive review of multi-digit addition and subtraction logic.",
+                  assign:
+                    "Complete a timed 'Arithmetic Sprint' covering all Wave 1 skills.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Multiplication and Division Fluency",
+              description:
+                "Building instant recall of times tables and introducing formal methods for division with remainders.",
+              sessions: [
+                {
+                  name: "The Easy Wins: 2s, 5s, and 10s",
+                  desc: "Reinforcing patterns in the most common multiplication tables.",
+                  assign:
+                    "Create a 'skip-counting' chart for 2, 5, and 10 up to 100.",
+                },
+                {
+                  name: "The Squares: 3x3 to 12x12",
+                  desc: "Learning the square numbers to create 'anchor points' for memory.",
+                  assign:
+                    "Draw square arrays on graph paper for 2x2 through 6x6.",
+                },
+                {
+                  name: "The Tricky Tables: 7s and 8s",
+                  desc: "Focused drills and mnemonic devices for the most difficult tables.",
+                  assign:
+                    "Flashcard drill: Spend 10 minutes on the 7 and 8 times tables.",
+                },
+                {
+                  name: "Multiplying by Multiples of 10",
+                  desc: "Understanding the 'zero rule' (e.g., 4 x 30 = 120).",
+                  assign: "Solve 10 problems like 6 x 40 and 5 x 60 mentally.",
+                },
+                {
+                  name: "Grid Method Multiplication",
+                  desc: "A visual way to multiply a 2-digit number by a 1-digit number.",
+                  assign: "Use the grid method to solve 24 x 6.",
+                },
+                {
+                  name: "Division as Fair Sharing",
+                  desc: "Relating division facts back to multiplication tables.",
+                  assign:
+                    "If 8 x 4 = 32, find the answer to 32 ÷ 8 and 32 ÷ 4.",
+                },
+                {
+                  name: "Introduction to Remainders",
+                  desc: "What happens when objects cannot be shared equally?",
+                  assign:
+                    "Divide 13 counters into 3 groups. How many are left over?",
+                },
+                {
+                  name: "The 'Bus Stop' Method",
+                  desc: "A formal introduction to short division.",
+                  assign: "Use the bus stop method to solve 84 ÷ 4.",
+                },
+                {
+                  name: "Remainders in Context",
+                  desc: "Deciding if you should round up or down based on a remainder.",
+                  assign:
+                    "Solve: '25 kids need to go on a trip. Each car fits 4. How many cars are needed?'",
+                },
+                {
+                  name: "Division Word Problems",
+                  desc: "Applying division logic to real-world stories.",
+                  assign:
+                    "Write your own story problem where the answer is 6 with a remainder of 2.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Fractions and Decimals",
+              description:
+                "Exploring the relationship between parts of a whole, from visual fractions to decimal notation.",
+              sessions: [
+                {
+                  name: "Visual Equivalence",
+                  desc: "Using fraction strips or circles to see that 1/2 = 2/4.",
+                  assign:
+                    "Color in 1/2 of a circle and 4/8 of an identical circle.",
+                },
+                {
+                  name: "Finding Factors",
+                  desc: "Learning how to divide or multiply both top and bottom numbers by the same digit.",
+                  assign: "Find three equivalent fractions for 1/3.",
+                },
+                {
+                  name: "Simplifying Fractions",
+                  desc: "Using division to put a fraction into its 'smallest' form.",
+                  assign: "Simplify 5/10, 6/9, and 4/12.",
+                },
+                {
+                  name: "Comparing Fractions",
+                  desc: "Using common denominators to see which fraction is larger.",
+                  assign:
+                    "Which is bigger: 1/4 or 1/3? Draw a picture to prove it.",
+                },
+                {
+                  name: "Fractions on a Number Line",
+                  desc: "Placing fractions between 0 and 1.",
+                  assign:
+                    "Draw a number line and mark where 1/4, 1/2, and 3/4 go.",
+                },
+                {
+                  name: "Adding Fractions (Like Denominators)",
+                  desc: "Understanding that only the numerator (top) changes.",
+                  assign: "Solve 2/8 + 3/8 and 1/5 + 2/5.",
+                },
+                {
+                  name: "Subtracting Fractions (Like Denominators)",
+                  desc: "Subtracting parts of a whole.",
+                  assign:
+                    "You have 5/6 of a pizza and eat 2/6. How much is left?",
+                },
+                {
+                  name: "Making a Whole",
+                  desc: "Identifying how many more parts are needed to reach 1.",
+                  assign: "Complete the 'Whole' puzzles: 1/3 + ? = 1.",
+                },
+                {
+                  name: "Tenths (0.1)",
+                  desc: "Relating 1/10 to the first decimal place.",
+                  assign: "Write 3/10 as a decimal.",
+                },
+                {
+                  name: "Hundredths (0.01)",
+                  desc: "Relating 1/100 to the second decimal place.",
+                  assign: "Write 56/100 as a decimal.",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Time and Measurement",
+              description:
+                "Applying mathematical precision to the passage of time and physical dimensions.",
+              sessions: [
+                {
+                  name: "Reading to the Minute",
+                  desc: "Fine-tuning clock reading skills.",
+                  assign:
+                    "Look at an analog clock and write the exact time (e.g., 4:17).",
+                },
+                {
+                  name: "AM and PM",
+                  desc: "Understanding the 24-hour cycle and midday/midnight.",
+                  assign: "Sort activities into 'AM' or 'PM' categories.",
+                },
+                {
+                  name: "Elapsed Time (Start/End)",
+                  desc: "Finding how long an event lasted.",
+                  assign:
+                    "A movie starts at 2:00 and ends at 3:45. How long was it?",
+                },
+                {
+                  name: "Calculating Backwards",
+                  desc: "Finding a start time when given the duration and end time.",
+                  assign:
+                    "Dinner takes 30 mins to cook. It must be ready at 6:00. When do you start?",
+                },
+                {
+                  name: "Calendars and Timelines",
+                  desc: "Calculating days and weeks between dates.",
+                  assign: "How many days until your next birthday?",
+                },
+                {
+                  name: "Millimeters to Centimeters",
+                  desc: "Learning that 10mm = 1cm and using a ruler accurately.",
+                  assign: "Measure 3 small items in both mm and cm.",
+                },
+                {
+                  name: "Meters and Kilometers",
+                  desc: "Scaling up measurement for distance.",
+                  assign:
+                    "Research the distance from your house to school in km.",
+                },
+                {
+                  name: "Grams and Kilograms",
+                  desc: "Measuring weight/mass using scales.",
+                  assign:
+                    "Find two things in the kitchen that weigh about 1kg.",
+                },
+                {
+                  name: "Milliliters and Liters",
+                  desc: "Understanding liquid volume and capacity.",
+                  assign:
+                    "Check the label on a water bottle and a juice carton for their volume.",
+                },
+                {
+                  name: "Unit Conversion Practice",
+                  desc: "Introduction to multiplying/dividing by 10, 100, 1000 for units.",
+                  assign: "Convert 200cm into meters.",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Geometry, Data, and Analysis",
+              description:
+                "Analyzing shapes, angles, and data through visualization and formal recording.",
+              sessions: [
+                {
+                  name: "Calculating Perimeter",
+                  desc: "Adding the distance around the outside of a shape.",
+                  assign:
+                    "Calculate the perimeter of a rectangle with sides 5cm and 8cm.",
+                },
+                {
+                  name: "Intro to Area (Square Units)",
+                  desc: "Counting squares inside a shape to find the surface space.",
+                  assign:
+                    "Draw a 4x4 square and count the total number of 1cm squares inside.",
+                },
+                {
+                  name: "Right, Acute, and Obtuse",
+                  desc: "Classifying angles based on their 'openness'.",
+                  assign:
+                    "Find a 'right angle' in your house (like a corner of a table).",
+                },
+                {
+                  name: "Using a Protractor",
+                  desc: "Introduction to measuring angles in degrees.",
+                  assign: "Draw a 90-degree angle and a 45-degree angle.",
+                },
+                {
+                  name: "Area of Rectangles Formula",
+                  desc: "Learning that Area = Length x Width.",
+                  assign:
+                    "Find the area of a rug that is 3 meters long and 2 meters wide.",
+                },
+                {
+                  name: "Bar Graphs",
+                  desc: "Drawing bars to represent discrete categories.",
+                  assign:
+                    "Make a bar graph showing the favorite colors of 5 friends.",
+                },
+                {
+                  name: "Line Plots",
+                  desc: "Using an 'X' to mark frequency on a number line.",
+                  assign:
+                    "Create a line plot showing the heights of 10 plants.",
+                },
+                {
+                  name: "Interpreting Data",
+                  desc: "Asking and answering questions based on existing graphs.",
+                  assign:
+                    "Look at a weather graph and find the hottest day of the week.",
+                },
+                {
+                  name: "Creating a Survey",
+                  desc: "Learning how to ask questions to gather mathematical data.",
+                  assign:
+                    "Write 3 questions you could ask your class to collect data.",
+                },
+                {
+                  name: "Course Finale: Data Project",
+                  desc: "A cumulative project combining measurement, counting, and graphing.",
+                  assign:
+                    "Measure the height of everyone in your house and graph the results.",
+                },
+              ],
+            },
+          ],
+        },
+        // The remaining courses (ages 11-12 through 17-18) remain unchanged from the original
+        {
+          name: "Fraction, Decimal, and Geometry Fluency",
+          age: "11-12",
+          description:
+            "A comprehensive transition to middle-school mathematics focusing on complex operations, proportional reasoning, and the formal properties of geometry and data analysis.",
+          waves: [
+            {
+              name: "Wave 1: Algebraic Logic and Multi-Step Operations",
+              description:
+                "Mastering the order of operations and the ability to translate complex linguistic information into mathematical structures.",
+              sessions: [
+                {
+                  name: "Brackets and Parentheses",
+                  desc: "Understanding why we solve items inside brackets first.",
+                  assign:
+                    "Solve 5 equations where changing the bracket position changes the answer.",
+                },
+                {
+                  name: "Exponents (Square Numbers)",
+                  desc: "Introduction to 'powers' of 2 and 3.",
+                  assign: "Create a list of square numbers from 1 to 144.",
+                },
+                {
+                  name: "Multiplication vs. Division Priority",
+                  desc: "Learning that these operations hold equal weight and are solved left-to-right.",
+                  assign: "Solve a 'chain' equation like 24 ÷ 4 × 3.",
+                },
+                {
+                  name: "Addition and Subtraction Priority",
+                  desc: "Applying the final steps of the order of operations.",
+                  assign: "Complete an order-of-operations crossword puzzle.",
+                },
+                {
+                  name: "The Grand Challenge: PEMDAS Mastery",
+                  desc: "Combining all rules into complex multi-step problems.",
+                  assign:
+                    "Solve the 'Four 4s' challenge: use four 4s and any operation to equal 1-10.",
+                },
+                {
+                  name: "Identifying Key Information",
+                  desc: "Learning to filter out 'noise' in word problems.",
+                  assign:
+                    "Highlight the numbers and 'action words' in a page of stories.",
+                },
+                {
+                  name: "The Bar Model Method",
+                  desc: "Visualizing problems using bars to represent unknown quantities.",
+                  assign:
+                    "Draw a bar model for: 'John has twice as much as Mary; together they have 30'.",
+                },
+                {
+                  name: "Working Backwards",
+                  desc: "Solving problems by starting from the result and reversing operations.",
+                  assign:
+                    "Solve: 'I think of a number, add 5, multiply by 2, and get 20. What is it?'",
+                },
+                {
+                  name: "Multi-Step Logic (Money)",
+                  desc: "Solving real-world scenarios involving shopping and budgets.",
+                  assign: "Plan a party with a $50 budget for 12 guests.",
+                },
+                {
+                  name: "Logic Puzzles and Riddles",
+                  desc: "Applying deduction to solve non-traditional math problems.",
+                  assign: "Solve the 'River Crossing' logic puzzle.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Advanced Decimal and Fraction Operations",
+              description:
+                "Deepening fluency with non-whole numbers through complex division, multiplication, and common denominators.",
+              sessions: [
+                {
+                  name: "Decimals and Powers of 10",
+                  desc: "Moving the decimal point when multiplying/dividing by 10, 100, 1000.",
+                  assign: "Mental math quiz: Solve 4.56 x 100 and 4.56 ÷ 10.",
+                },
+                {
+                  name: "Multiplying Decimals by Decimals",
+                  desc: "Using the 'ignore the point, then count the places' rule.",
+                  assign:
+                    "Solve 0.3 x 0.04 and explain why the answer is smaller than the parts.",
+                },
+                {
+                  name: "Long Division with Decimals",
+                  desc: "Dividing decimals by whole numbers accurately.",
+                  assign:
+                    "Solve 15.6 ÷ 3 using the long division bus stop method.",
+                },
+                {
+                  name: "Decimal Division (Decimal Divisor)",
+                  desc: "Converting divisors to whole numbers to simplify division.",
+                  assign: "Solve 2.5 ÷ 0.5 by turning it into 25 ÷ 5.",
+                },
+                {
+                  name: "Decimals in Science",
+                  desc: "Using decimals to measure precise weights and lengths.",
+                  assign:
+                    "Measure 5 items to the nearest 0.1cm and find their total length.",
+                },
+                {
+                  name: "The Least Common Multiple (LCM)",
+                  desc: "Finding the best shared denominator for two fractions.",
+                  assign: "Find the LCM for 1/3 and 1/4.",
+                },
+                {
+                  name: "Adding Unlike Fractions",
+                  desc: "Converting and adding fractions with different bottoms.",
+                  assign: "Solve 1/2 + 1/3 using a visual area model.",
+                },
+                {
+                  name: "Subtracting with Borrowing",
+                  desc: "Subtracting fractions from whole or mixed numbers.",
+                  assign: "Solve 2 - 3/4 and 1 1/4 - 1/2.",
+                },
+                {
+                  name: "Simplifying Results",
+                  desc: "Using the Greatest Common Factor (GCF) to reduce fractions.",
+                  assign:
+                    "Reduce 12/18, 15/25, and 20/100 to their simplest form.",
+                },
+                {
+                  name: "Mixed Number Addition",
+                  desc: "Adding large mixed numbers (e.g., 2 1/2 + 3 2/3).",
+                  assign:
+                    "Calculate the total weight of three bags of flour with mixed fractions.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Fraction Scaling, Ratios, and Proportions",
+              description:
+                "Moving from basic fraction operations to multiplicative reasoning and proportional scaling.",
+              sessions: [
+                {
+                  name: "Multiplying Fractions",
+                  desc: "Learning that 'of' means multiply in fraction context.",
+                  assign: "Solve 1/2 of 1/4 using a paper-folding activity.",
+                },
+                {
+                  name: "Multiplying Mixed Numbers",
+                  desc: "Converting to improper fractions before calculating.",
+                  assign: "Solve 1 1/2 x 2 1/4.",
+                },
+                {
+                  name: "Dividing Fractions (Keep-Change-Flip)",
+                  desc: "Understanding why we multiply by the reciprocal.",
+                  assign: "Solve 1/2 ÷ 4 and 3 ÷ 1/3.",
+                },
+                {
+                  name: "Fraction Word Problems",
+                  desc: "Deciding which operation to use in a real scenario.",
+                  assign:
+                    "If a recipe needs 3/4 cup of sugar, how much for 2.5 batches?",
+                },
+                {
+                  name: "Fraction vs. Decimal Conversion",
+                  desc: "Turning 1/4 into 0.25 and vice versa.",
+                  assign:
+                    "Create a conversion chart for 1/2, 1/4, 1/5, 1/8, and 1/10.",
+                },
+                {
+                  name: "What is a Percentage?",
+                  desc: "Understanding percent as 'per hundred'.",
+                  assign: "Color a 100-grid to show 25%, 50%, and 10%.",
+                },
+                {
+                  name: "Finding Percent of a Number",
+                  desc: "Calculating 10%, 25%, and 50% of various totals.",
+                  assign: "Calculate the 10% tip for a $30 restaurant bill.",
+                },
+                {
+                  name: "Introduction to Ratios",
+                  desc: "Comparing two quantities using the colon (e.g., 2:3).",
+                  assign:
+                    "Count boys vs girls in a group and write as a ratio.",
+                },
+                {
+                  name: "Scaling Ratios",
+                  desc: "Increasing quantities while keeping the ratio the same.",
+                  assign:
+                    "A recipe uses 2 cups water for 1 cup rice. How much for 4 cups rice?",
+                },
+                {
+                  name: "Proportions in Art",
+                  desc: "Using ratios to draw or build scale models.",
+                  assign: "Draw a 1:2 scale version of your smartphone.",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Geometry Foundations (2D and 3D)",
+              description:
+                "Calculating properties of space and shape, including perimeter, area, volume, and coordinates.",
+              sessions: [
+                {
+                  name: "Perimeter of Complex Shapes",
+                  desc: "Adding all sides of an L-shaped (composite) figure.",
+                  assign:
+                    "Measure the perimeter of your room by counting steps.",
+                },
+                {
+                  name: "Area of Rectangles (A = l × w)",
+                  desc: "Deepening the understanding of square units (cm²).",
+                  assign:
+                    "Calculate how many 1x1 tiles are needed for a 5x8 floor.",
+                },
+                {
+                  name: "Area of Triangles",
+                  desc: "Understanding why a triangle is half a rectangle.",
+                  assign:
+                    "Use the formula 1/2 × b × h to find the area of 3 triangles.",
+                },
+                {
+                  name: "Area of Composite Shapes",
+                  desc: "Splitting complex shapes into smaller rectangles.",
+                  assign:
+                    "Find the area of an 'L' shape by dividing it into two pieces.",
+                },
+                {
+                  name: "Missing Dimensions",
+                  desc: "Finding the length if the area and width are known.",
+                  assign: "If Area = 24 and Width = 4, what is the Length?",
+                },
+                {
+                  name: "Intro to Volume (V = l × w × h)",
+                  desc: "Understanding cubic units (cm³).",
+                  assign: "Count how many sugar cubes fit in a small box.",
+                },
+                {
+                  name: "Volume of Rectangular Prisms",
+                  desc: "Calculating the space inside boxes.",
+                  assign: "Find the volume of a cereal box in cm³.",
+                },
+                {
+                  name: "Nets of 3D Shapes",
+                  desc: "Visualizing a 3D shape flattened into 2D.",
+                  assign: "Cut out and fold a paper net to create a cube.",
+                },
+                {
+                  name: "Surface Area (Intro)",
+                  desc: "Adding the area of all faces of a 3D shape.",
+                  assign:
+                    "Calculate the total paper needed to wrap a specific box.",
+                },
+                {
+                  name: "Volume in Real Life",
+                  desc: "Comparing the volume of different containers.",
+                  assign:
+                    "Which has more volume: a tall skinny box or a short fat box?",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Coordinates and Data Literacy",
+              description:
+                "Visualizing locations on a grid and analyzing data sets through graphs and central tendency.",
+              sessions: [
+                {
+                  name: "The X and Y Axis",
+                  desc: "Identifying the horizontal and vertical lines.",
+                  assign: "Label a blank grid with X and Y and numbers 0-10.",
+                },
+                {
+                  name: "Plotting Coordinates (x, y)",
+                  desc: "Learning 'crawl before you climb' (move right, then up).",
+                  assign: "Plot the points (2,3), (5,7), and (8,1).",
+                },
+                {
+                  name: "Coordinate Battleship",
+                  desc: "Using coordinates to find hidden locations.",
+                  assign:
+                    "Play a game of 'Coordinate Battleship' with a partner.",
+                },
+                {
+                  name: "Drawing Shapes on a Grid",
+                  desc: "Connecting dots to form polygons.",
+                  assign:
+                    "Plot (1,1), (1,4), (4,4), and (4,1). What shape is it?",
+                },
+                {
+                  name: "Translating Shapes",
+                  desc: "Moving a shape 3 units right and 2 units up.",
+                  assign: "Redraw a triangle in its new position on the grid.",
+                },
+                {
+                  name: "Line Graphs",
+                  desc: "Tracking changes over time (e.g., temperature).",
+                  assign:
+                    "Plot the daily temperature for one week on a line graph.",
+                },
+                {
+                  name: "Pie Charts",
+                  desc: "Understanding data as slices of a whole (linked to fractions).",
+                  assign:
+                    "Look at a pie chart of 'Favorite Pets' and name the top choice.",
+                },
+                {
+                  name: "Mean, Median, and Mode",
+                  desc: "Calculating the three types of 'average'.",
+                  assign: "Find the average height of 5 family members.",
+                },
+                {
+                  name: "Reading Complex Tables",
+                  desc: "Extracting data from multi-column schedules.",
+                  assign:
+                    "Use a bus timetable to find the fastest route to a destination.",
+                },
+                {
+                  name: "Final Project: Data Survey",
+                  desc: "Conducting a survey and choosing the best graph to show it.",
+                  assign:
+                    "Survey 10 people and create a poster showing your results.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Pre-Algebra and Data Literacy",
+          age: "13-14",
+          description:
+            "A foundational secondary mathematics course designed to transition students from concrete arithmetic to abstract algebraic thinking and geometric proof.",
+          waves: [
+            {
+              name: "Wave 1: Integers and Algebraic Foundations",
+              description:
+                "Mastering the logic of positive and negative numbers and transitioning those rules into algebraic expressions.",
+              sessions: [
+                {
+                  name: "Negative Numbers in Context",
+                  desc: "Exploring real-world negatives like temperature, debt, and sea level.",
+                  assign:
+                    "Write five real-life scenarios that would be represented by a negative number.",
+                },
+                {
+                  name: "Adding and Subtracting Integers",
+                  desc: "Using number lines to visualize movement with negative values.",
+                  assign:
+                    "Solve a set of 20 problems including combinations like (-5) - (-3).",
+                },
+                {
+                  name: "Multiplying and Dividing Integers",
+                  desc: "Mastering the rules of signs (e.g., negative x negative = positive).",
+                  assign:
+                    "Complete a 'Sign Rule' chart and solve 10 mixed integer equations.",
+                },
+                {
+                  name: "Absolute Value",
+                  desc: "Understanding distance from zero regardless of direction.",
+                  assign:
+                    "Compare | -15 | and | 10 |; explain which has the greater magnitude.",
+                },
+                {
+                  name: "Integer Word Problems",
+                  desc: "Solving multi-step problems involving temperature shifts and bank balances.",
+                  assign:
+                    "Calculate a hiker's final altitude after a series of climbs and descents.",
+                },
+                {
+                  name: "What is a Variable?",
+                  desc: "Translating words like 'twice a number' into 2x.",
+                  assign: "Translate 10 phrases into algebraic expressions.",
+                },
+                {
+                  name: "Combining Like Terms",
+                  desc: "Learning to simplify expressions by grouping identical variables.",
+                  assign: "Simplify 3x + 5y - x + 2y.",
+                },
+                {
+                  name: "The Distributive Property",
+                  desc: "Expanding expressions such as a(b + c).",
+                  assign: "Expand 4(x + 3) and x(x - 5).",
+                },
+                {
+                  name: "Evaluating Expressions",
+                  desc: "Substituting known values into variables to find a total.",
+                  assign: "If x = 3 and y = -2, find the value of 2x + 4y.",
+                },
+                {
+                  name: "Factoring Basics",
+                  desc: "The inverse of distribution: finding the greatest common factor.",
+                  assign: "Factor the expression 6x + 12.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Equations and Proportional Reasoning",
+              description:
+                "Solving multi-step equations and applying multiplicative thinking to rates and scales.",
+              sessions: [
+                {
+                  name: "One-Step Equations (Add/Sub)",
+                  desc: "Isolating x using inverse operations.",
+                  assign: "Solve x + 15 = 40 and x - 7 = -12.",
+                },
+                {
+                  name: "One-Step Equations (Mult/Div)",
+                  desc: "Using division to solve for a coefficient.",
+                  assign: "Solve 5x = 35 and x/4 = 8.",
+                },
+                {
+                  name: "Two-Step Equations",
+                  desc: "Combining operations (e.g., 2x + 5 = 15).",
+                  assign:
+                    "Solve 10 equations that require two steps to isolate the variable.",
+                },
+                {
+                  name: "Checking Solutions",
+                  desc: "Plugging the answer back into the equation to verify accuracy.",
+                  assign:
+                    "Swap your solved equations with a partner and verify their answers.",
+                },
+                {
+                  name: "Modeling with Equations",
+                  desc: "Writing an equation to represent a word problem.",
+                  assign:
+                    "Write and solve an equation for: 'A taxi costs $5 plus $2 per mile. The total is $25. How many miles?'",
+                },
+                {
+                  name: "Unit Rates",
+                  desc: "Finding the 'per one' value (e.g., miles per hour).",
+                  assign:
+                    "Calculate which is cheaper: 3 apples for $1.50 or 5 apples for $2.25.",
+                },
+                {
+                  name: "Solving Proportions",
+                  desc: "Using cross-multiplication to find an unknown value.",
+                  assign: "Solve x/5 = 12/20.",
+                },
+                {
+                  name: "Scale Drawings",
+                  desc: "Using ratios to interpret maps and blueprints.",
+                  assign:
+                    "If 1cm = 5km, how far apart are two cities that are 4.5cm apart on the map?",
+                },
+                {
+                  name: "Direct Proportion",
+                  desc: "Understanding that when one value doubles, the other does too.",
+                  assign:
+                    "Graph a set of proportional values to show they form a straight line through the origin.",
+                },
+                {
+                  name: "Speed, Distance, and Time",
+                  desc: "Using the D = S x T formula.",
+                  assign:
+                    "Calculate the speed of a car that travels 150 miles in 3 hours.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Percents and Geometric Proof",
+              description:
+                "Applying percentage logic to finance and exploring the properties of lines and shapes.",
+              sessions: [
+                {
+                  name: "Percent Increase and Decrease",
+                  desc: "Calculating the new total after a percentage change.",
+                  assign:
+                    "Find the final price of a $60 item that increases by 15%.",
+                },
+                {
+                  name: "Discounts and Sale Prices",
+                  desc: "Applying percentages to retail scenarios.",
+                  assign:
+                    "Calculate the savings on a '30% off' sale for a $120 jacket.",
+                },
+                {
+                  name: "Tax and Gratuity",
+                  desc: "Adding sales tax and tips to totals.",
+                  assign:
+                    "Calculate the total bill for a $45 meal with 8% tax and a 15% tip.",
+                },
+                {
+                  name: "Simple Interest",
+                  desc: "Introduction to the formula I = P x R x T.",
+                  assign:
+                    "Find the interest earned on $500 at 4% interest over 2 years.",
+                },
+                {
+                  name: "Percent Error",
+                  desc: "Calculating the accuracy of an estimate.",
+                  assign:
+                    "If you estimated 50 people would come but 60 did, what was your percent error?",
+                },
+                {
+                  name: "Angle Relationships",
+                  desc: "Learning about supplementary, complementary, and vertical angles.",
+                  assign:
+                    "Find the missing angle: If Angle A and B are supplementary and A is 70, what is B?",
+                },
+                {
+                  name: "Parallel Lines and Transversals",
+                  desc: "Identifying alternate interior and corresponding angles.",
+                  assign:
+                    "Identify 8 angles created by a transversal and label which are equal.",
+                },
+                {
+                  name: "Angles in Triangles and Quadrilaterals",
+                  desc: "Proving that the sum of interior angles is constant (180 and 360).",
+                  assign:
+                    "Calculate the third angle of a triangle if two angles are 45 and 85.",
+                },
+                {
+                  name: "Geometric Transformations",
+                  desc: "Introduction to Translations, Reflections, and Rotations.",
+                  assign:
+                    "Draw a triangle and then draw its reflection across a vertical line.",
+                },
+                {
+                  name: "Congruence and Similarity",
+                  desc: "Understanding same shape vs. same size.",
+                  assign:
+                    "Identify if two triangles are similar based on their side ratios.",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Pythagoras and Linear Graphing",
+              description:
+                "Connecting geometry and algebra through triangle theorems and coordinate geometry.",
+              sessions: [
+                {
+                  name: "Squares and Square Roots",
+                  desc: "Understanding the inverse of squaring a number.",
+                  assign: "Find the square root of 64, 81, and 144.",
+                },
+                {
+                  name: "Introduction to a² + b² = c²",
+                  desc: "Visualizing the theorem using area squares on each side.",
+                  assign:
+                    "Prove the theorem using a 3-4-5 triangle on grid paper.",
+                },
+                {
+                  name: "Finding the Hypotenuse",
+                  desc: "Solving for the longest side (c).",
+                  assign: "Solve for c if a=6 and b=8.",
+                },
+                {
+                  name: "Finding a Missing Leg",
+                  desc: "Rearranging the formula to find a or b.",
+                  assign: "Solve for a if c=13 and b=12.",
+                },
+                {
+                  name: "Pythagoras in the Real World",
+                  desc: "Using the theorem to find ladder lengths or diagonal distances.",
+                  assign:
+                    "How long must a ladder be to reach a 10ft window if it is 3ft from the wall?",
+                },
+                {
+                  name: "The Slope of a Line",
+                  desc: "Understanding slope as 'Rise over Run'.",
+                  assign: "Calculate the slope between points (1,2) and (3,6).",
+                },
+                {
+                  name: "Slope-Intercept Form (y = mx + b)",
+                  desc: "Identifying the slope (m) and y-intercept (b).",
+                  assign:
+                    "Write the equation for a line with a slope of 2 and intercept of 1.",
+                },
+                {
+                  name: "Graphing from an Equation",
+                  desc: "Plotting a line starting from the y-intercept.",
+                  assign: "Graph the equation y = 1/2x + 3.",
+                },
+                {
+                  name: "Horizontal and Vertical Lines",
+                  desc: "Understanding equations like x = 4 and y = -2.",
+                  assign: "Graph x = -3 and y = 5 on the same grid.",
+                },
+                {
+                  name: "Intercepts and Roots",
+                  desc: "Finding where the line crosses the x and y axes.",
+                  assign:
+                    "Find the x-intercept for 2x + 4y = 8 by setting y to zero.",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Data, Probability, and Life Skills",
+              description:
+                "Interpreting statistical variability and applying math to real-world logistics and finance.",
+              sessions: [
+                {
+                  name: "Theoretical Probability",
+                  desc: "Calculating likelihood using the formula: Favorable / Total.",
+                  assign:
+                    "What is the probability of rolling a prime number on a 6-sided die?",
+                },
+                {
+                  name: "Independent vs Dependent Events",
+                  desc: "Understanding if one event affects the next.",
+                  assign:
+                    "Explain if picking two socks from a drawer is independent or dependent.",
+                },
+                {
+                  name: "Mean, Median, Mode, and Range",
+                  desc: "Reviewing and applying central tendency to larger data sets.",
+                  assign:
+                    "Find the mean and range for the following test scores: 85, 90, 70, 95, 80.",
+                },
+                {
+                  name: "Box and Whisker Plots",
+                  desc: "Visualizing the distribution and quartiles of data.",
+                  assign:
+                    "Identify the median and 'whiskers' on a provided plot.",
+                },
+                {
+                  name: "Sampling and Bias",
+                  desc: "Understanding how data can be misleading if the sample is too small.",
+                  assign:
+                    "Critique a survey that only asked 2 people their opinion on school lunch.",
+                },
+                {
+                  name: "Personal Budgeting",
+                  desc: "Creating a balanced spreadsheet of income vs. expenses.",
+                  assign:
+                    "Create a monthly budget for a student with a $50 allowance and expenses.",
+                },
+                {
+                  name: "Interpreting Timetables",
+                  desc: "Using logic to navigate complex travel schedules.",
+                  assign:
+                    "Plan a cross-country train trip using a real railway timetable.",
+                },
+                {
+                  name: "Currency Exchange",
+                  desc: "Using ratios to convert money for travel.",
+                  assign:
+                    "If $1 = 0.90 Euro, how many Euros do you get for $150?",
+                },
+                {
+                  name: "Math in the Kitchen",
+                  desc: "Scaling recipes using fractions and proportions.",
+                  assign:
+                    "Convert a recipe for 4 people into a recipe for 10 people.",
+                },
+                {
+                  name: "Capstone Project: The Business Plan",
+                  desc: "Using algebra and data to pitch a small business idea.",
+                  assign:
+                    "Calculate the startup costs, profit margins, and price points for a lemonade stand.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Algebraic Functions and Trigonometric Foundations",
+          age: "15-16",
+          description:
+            "An advanced secondary course focusing on non-linear relationships, systems of equations, and the application of trigonometric ratios to solve complex geometric problems.",
+          waves: [
+            {
+              name: "Wave 1: Advanced Linear Systems and Modeling",
+              description:
+                "Mastering complex linear equations, inequalities, and systems using multiple algebraic methods.",
+              sessions: [
+                {
+                  name: "Multi-Step Linear Equations",
+                  desc: "Solving equations with variables on both sides and complex grouping.",
+                  assign: "Solve $3(x - 4) = 2(x + 5) - 8$.",
+                },
+                {
+                  name: "Literal Equations",
+                  desc: "Rearranging formulas to solve for a specific variable.",
+                  assign:
+                    "Rearrange the Ideal Gas Law $PV = nRT$ to solve for $T$.",
+                },
+                {
+                  name: "Linear Inequalities",
+                  desc: "Solving and graphing inequalities on a number line, including sign-flip rules.",
+                  assign: "Solve $-3x + 7 > 22$ and graph the solution set.",
+                },
+                {
+                  name: "Absolute Value Equations",
+                  desc: "Solving equations where the variable is inside absolute value bars.",
+                  assign: "Solve $|2x - 5| = 11$.",
+                },
+                {
+                  name: "Linear Modeling",
+                  desc: "Creating linear equations to predict real-world outcomes.",
+                  assign:
+                    "Write a linear model for a phone plan that costs $20/month plus $0.05 per text.",
+                },
+                {
+                  name: "Systems: Solving by Graphing",
+                  desc: "Visualizing the solution as the intersection point $(x, y)$.",
+                  assign:
+                    "Graph $y = x + 2$ and $y = -x + 4$ to find the intersection.",
+                },
+                {
+                  name: "Systems: Solving by Substitution",
+                  desc: "Replacing one variable with an expression from the second equation.",
+                  assign: "Solve the system: $y = 3x - 1$ and $2x + y = 9$.",
+                },
+                {
+                  name: "Systems: Solving by Elimination",
+                  desc: "Adding or subtracting equations to cancel out a variable.",
+                  assign: "Solve the system: $3x + 2y = 10$ and $3x - 2y = 2$.",
+                },
+                {
+                  name: "Special Systems and Solutions",
+                  desc: "Identifying 'No Solution' (parallel) or 'Infinite Solutions' (identical lines).",
+                  assign:
+                    "Determine the number of solutions for: $y = 2x + 5$ and $4x - 2y = -10$.",
+                },
+                {
+                  name: "Real-World Systems Applications",
+                  desc: "Solving 'mixture' and 'rate' problems using two variables.",
+                  assign:
+                    "Solve: 'A mix of $2 and $5 bills totals $50. There are 16 bills. How many of each?'",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Functions and Quadratic Mastery",
+              description:
+                "Transitioning from linear logic to the study of parabolas, roots, and function notation.",
+              sessions: [
+                {
+                  name: "What is a Function?",
+                  desc: "Using mapping and the Vertical Line Test to identify functions.",
+                  assign:
+                    "Identify which mapping diagrams and graphs represent functions.",
+                },
+                {
+                  name: "Function Notation and Evaluation",
+                  desc: "Understanding f(x) and evaluating functions at specific points.",
+                  assign: "If $f(x) = x^2 - 3$, find $f(4)$ and $f(-2)$.",
+                },
+                {
+                  name: "Domain and Range",
+                  desc: "Identifying the set of all possible inputs and outputs.",
+                  assign:
+                    "Determine the domain and range of a square root function graph.",
+                },
+                {
+                  name: "Arithmetic Sequences as Functions",
+                  desc: "Treating sequences as discrete linear functions.",
+                  assign: "Find the 50th term of the sequence: 5, 8, 11, 14...",
+                },
+                {
+                  name: "Factoring Trinomials",
+                  desc: "Factoring expressions in the form $x^2 + bx + c$.",
+                  assign: "Factor $x^2 + 7x + 10$ into $(x+2)(x+5)$.",
+                },
+                {
+                  name: "Solving by Square Roots",
+                  desc: "Solving quadratic equations where the linear term (bx) is zero.",
+                  assign: "Solve $3x^2 - 27 = 0$.",
+                },
+                {
+                  name: "The Quadratic Formula",
+                  desc: "Using the 'universal tool' to find roots for any quadratic.",
+                  assign: "Use the formula to solve $x^2 - 5x + 6 = 0$.",
+                },
+                {
+                  name: "Graphing Parabolas",
+                  desc: "Identifying the vertex, axis of symmetry, and y-intercept.",
+                  assign: "Graph $y = x^2 - 4x + 3$ and label the vertex.",
+                },
+                {
+                  name: "The Discriminant",
+                  desc: "Predicting the number of real roots using $b^2 - 4ac$.",
+                  assign:
+                    "Calculate the discriminant for $x^2 + 2x + 5$ and describe the roots.",
+                },
+                {
+                  name: "Modeling Projectile Motion",
+                  desc: "Using quadratics to track the path of objects in flight.",
+                  assign:
+                    "Determine the max height of a ball given $h(t) = -16t^2 + 20t + 5$.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Right Triangle and Applied Trigonometry",
+              description:
+                "Exploring the ratios of Sine, Cosine, and Tangent and their real-world applications.",
+              sessions: [
+                {
+                  name: "The Tangent Ratio (Tan)",
+                  desc: "Opposite over Adjacent and its use in finding heights.",
+                  assign:
+                    "Find the height of a tree if the angle to the top is 30° from 20m away.",
+                },
+                {
+                  name: "Sine and Cosine (Sin & Cos)",
+                  desc: "Mastering SOH-CAH-TOA and hypotenuse relationships.",
+                  assign:
+                    "Calculate the missing side where hypotenuse is 10 and $\\theta = 45^\\circ$.",
+                },
+                {
+                  name: "Inverse Trig Functions",
+                  desc: "Using trig ratios to find missing angles.",
+                  assign:
+                    "Find the angle of a ramp that rises 3ft over a 10ft horizontal distance.",
+                },
+                {
+                  name: "Special Right Triangles",
+                  desc: "Exploring 45-45-90 and 30-60-90 triangle properties.",
+                  assign:
+                    "If the short leg of a 30-60-90 triangle is 5, find the other sides.",
+                },
+                {
+                  name: "Angles of Elevation and Depression",
+                  desc: "Applying trig to sightline problems in navigation and safety.",
+                  assign:
+                    "A lifeguard sees a swimmer at a 15° angle of depression. How far away is the swimmer?",
+                },
+                {
+                  name: "Simplifying Radicals",
+                  desc: "Pulling out perfect squares to simplify root expressions.",
+                  assign: "Simplify $\\sqrt{72}$ and $\\sqrt{128}$.",
+                },
+                {
+                  name: "Rational Exponents",
+                  desc: "Linking radical form to fractional power notation.",
+                  assign:
+                    "Rewrite $8^{1/3}$ and $16^{3/4}$ in radical form and solve.",
+                },
+                {
+                  name: "Operations with Radicals",
+                  desc: "Adding, subtracting, and multiplying square root expressions.",
+                  assign:
+                    "Solve $3\\sqrt{2} + 5\\sqrt{2}$ and $\\sqrt{3} \\times \\sqrt{6}$.",
+                },
+                {
+                  name: "Rationalizing the Denominator",
+                  desc: "Removing roots from the bottom of a fraction.",
+                  assign: "Rationalize $5 / \\sqrt{2}$.",
+                },
+                {
+                  name: "Radical Equations",
+                  desc: "Solving equations where the variable is under a square root.",
+                  assign: "Solve $\\sqrt{x + 5} = 4$.",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Geometry Proofs and Logic",
+              description:
+                "Developing deductive reasoning through formal proofs of triangles, circles, and similarity.",
+              sessions: [
+                {
+                  name: "Intro to Deductive Reasoning",
+                  desc: "Using 'If-Then' statements, postulates, and theorems.",
+                  assign:
+                    "Write the converse and contrapositive of a geometric statement.",
+                },
+                {
+                  name: "Triangle Congruence: SSS and SAS",
+                  desc: "Proving triangles are identical using side and angle relationships.",
+                  assign:
+                    "Complete a two-column proof for triangle congruence.",
+                },
+                {
+                  name: "Triangle Congruence: ASA and AAS",
+                  desc: "Expanding proof techniques for various given conditions.",
+                  assign:
+                    "Identify the correct congruence theorem for 3 sets of triangles.",
+                },
+                {
+                  name: "Similarity and AA Postulate",
+                  desc: "Proving shapes are proportional rather than identical.",
+                  assign:
+                    "Use AA similarity to find the height of a building using its shadow.",
+                },
+                {
+                  name: "Properties of Circles: Arc and Chord",
+                  desc: "Exploring central angles and chord lengths.",
+                  assign:
+                    "Find the measure of an arc if the central angle is 60°.",
+                },
+                {
+                  name: "Properties of Circles: Tangents",
+                  desc: "Understanding the 90-degree relationship of tangent lines.",
+                  assign:
+                    "Solve for a missing side in a circle/tangent triangle.",
+                },
+                {
+                  name: "Coordinate Geometry Proofs: Distance",
+                  desc: "Using the distance formula to prove side lengths are equal.",
+                  assign: "Calculate the distance between (2,3) and (5,7).",
+                },
+                {
+                  name: "Coordinate Geometry Proofs: Slope",
+                  desc: "Proving lines are parallel or perpendicular on a grid.",
+                  assign:
+                    "Prove a quadrilateral is a parallelogram using slope calculations.",
+                },
+                {
+                  name: "Midpoint and Partitioning",
+                  desc: "Finding the exact center of a line segment.",
+                  assign: "Find the midpoint between (-4, 2) and (8, 10).",
+                },
+                {
+                  name: "Geometric Transformations",
+                  desc: "Translations, Reflections, Rotations, and Dilations.",
+                  assign:
+                    "Draw a triangle and dilate it by a scale factor of 2.",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Statistics, Probability, and Modeling",
+              description:
+                "Analyzing data trends, calculating compound probability, and building mathematical models.",
+              sessions: [
+                {
+                  name: "Scatter Plots and Correlation",
+                  desc: "Identifying positive, negative, and no correlation.",
+                  assign:
+                    "Plot 'Hours Studied' vs 'Test Score' and describe the trend.",
+                },
+                {
+                  name: "Line of Best Fit (Trend Lines)",
+                  desc: "Drawing a linear model through data to make predictions.",
+                  assign:
+                    "Draw a trend line and find its equation ($y = mx + b$).",
+                },
+                {
+                  name: "Residuals and Outliers",
+                  desc: "Understanding data variance and identifying unusual points.",
+                  assign:
+                    "Identify an outlier and explain its effect on the mean.",
+                },
+                {
+                  name: "Standard Deviation (Intro)",
+                  desc: "Introduction to how 'spread out' data is from the mean.",
+                  assign:
+                    "Compare the variability of two sports players' scores.",
+                },
+                {
+                  name: "Interpreting Two-Way Tables",
+                  desc: "Analyzing categorical data and relative frequencies.",
+                  assign:
+                    "Calculate percentages from a class preference survey table.",
+                },
+                {
+                  name: "Theoretical vs. Experimental Probability",
+                  desc: "Comparing mathematical expectations to real-world trial results.",
+                  assign:
+                    "Flip a coin 50 times and compare to 50% theoretical result.",
+                },
+                {
+                  name: "Independent Events (Multiplication Rule)",
+                  desc: "Calculating the probability of two events happening together.",
+                  assign:
+                    "Find the probability of rolling a 6 and flipping heads.",
+                },
+                {
+                  name: "Dependent Events (Replacement)",
+                  desc: "Probability where the first outcome affects the second.",
+                  assign:
+                    "Find the probability of picking two red cards in a row.",
+                },
+                {
+                  name: "Tree Diagrams",
+                  desc: "Visualizing complex sample spaces.",
+                  assign:
+                    "Draw a tree diagram for picking an outfit from shirts and pants.",
+                },
+                {
+                  name: "Final Capstone: Math Investigation",
+                  desc: "Conducting an experiment and choosing a model (Linear or Quadratic).",
+                  assign:
+                    "Measure how rubber band stretch relates to distance shot and create a model.",
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: "Advanced Mathematics and Calculus Foundations",
+          age: "17-18",
+          description:
+            "A pre-university mastery course focusing on the mechanics of calculus, transcendental functions, complex number theory, and advanced statistical inference.",
+          waves: [
+            {
+              name: "Wave 1: Advanced Functions and Complex Systems",
+              description:
+                "Mastering high-degree polynomials, rational functions, and the expansion into the complex number plane.",
+              sessions: [
+                {
+                  name: "Polynomial Division and Factor Theorem",
+                  desc: "Using long and synthetic division to find factors of cubic and quartic functions.",
+                  assign: "Factor P(x) = x^3 - 4x^2 - 7x + 10 completely.",
+                },
+                {
+                  name: "Rational Functions and Asymptotes",
+                  desc: "Identifying vertical, horizontal, and oblique asymptotes through limit logic.",
+                  assign:
+                    "Sketch f(x) = (2x + 1) / (x - 3) and label all asymptotes.",
+                },
+                {
+                  name: "Partial Fraction Decomposition",
+                  desc: "Decomposing complex rational expressions to prepare for advanced integration.",
+                  assign:
+                    "Express (5x - 1) / ((x - 1)(x + 2)) as partial fractions.",
+                },
+                {
+                  name: "Solving Rational Inequalities",
+                  desc: "Using sign charts and critical values to solve fractional inequalities.",
+                  assign: "Solve (x - 1) / (x + 3) >= 0.",
+                },
+                {
+                  name: "Graphing High-Degree Polynomials",
+                  desc: "Analyzing multiplicity of roots and end behavior.",
+                  assign: "Sketch y = -x^2(x - 4)(x + 2).",
+                },
+                {
+                  name: "Intro to Imaginary Unit (i)",
+                  desc: "Understanding i = sqrt(-1) and the cyclical powers of i.",
+                  assign: "Simplify i^23 and solve x^2 + 16 = 0.",
+                },
+                {
+                  name: "Complex Arithmetic",
+                  desc: "Operations in a + bi form and the use of conjugates.",
+                  assign: "Perform (3 + 2i)(1 - 4i) and simplify.",
+                },
+                {
+                  name: "The Complex Plane (Argand Diagrams)",
+                  desc: "Visualizing complex numbers as vectors and calculating modulus.",
+                  assign: "Plot z = 4 - 3i and calculate |z|.",
+                },
+                {
+                  name: "Polar Form of Complex Numbers",
+                  desc: "Representing complex numbers using r and theta.",
+                  assign: "Convert 1 + i into polar form.",
+                },
+                {
+                  name: "Complex Numbers Review",
+                  desc: "Synthesizing rectangular and polar forms for problem solving.",
+                  assign:
+                    "Solve a series of complex equations using De Moivre's Theorem.",
+                },
+              ],
+            },
+            {
+              name: "Wave 2: Transcendental Functions and Series",
+              description:
+                "Deep exploration of logarithmic and exponential growth alongside infinite sequences and binomial expansions.",
+              sessions: [
+                {
+                  name: "Exponential Growth and Decay",
+                  desc: "Modeling real-world growth using y = ab^x.",
+                  assign: "Model a city's population growing at 3% per year.",
+                },
+                {
+                  name: "Logarithmic Fundamentals",
+                  desc: "Understanding log as the inverse of an exponent.",
+                  assign: "Convert log2(64) = 6 into exponential form.",
+                },
+                {
+                  name: "The Laws of Logarithms",
+                  desc: "Mastering the product, quotient, and power rules.",
+                  assign: "Expand log(x^2y/z) using log laws.",
+                },
+                {
+                  name: "Natural Logs and Base e",
+                  desc: "Focusing on ln(x) for continuous growth models.",
+                  assign: "Solve 100e^(0.05t) = 500 for t.",
+                },
+                {
+                  name: "Logarithmic Scales",
+                  desc: "Applications in pH and Richter scale calculations.",
+                  assign:
+                    "Calculate the pH of a solution with 10^-4 hydrogen ion concentration.",
+                },
+                {
+                  name: "Arithmetic and Geometric Sequences",
+                  desc: "Finding the nth term for linear and exponential patterns.",
+                  assign: "Find the 10th term of the sequence 3, 6, 12, 24...",
+                },
+                {
+                  name: "Finite Series Summation",
+                  desc: "Calculating the sum of the first n terms.",
+                  assign: "Find the sum of the first 50 integers.",
+                },
+                {
+                  name: "Infinite Geometric Series",
+                  desc: "Understanding convergence and the sum to infinity.",
+                  assign: "Find the sum of 1 + 1/2 + 1/4 + 1/8...",
+                },
+                {
+                  name: "Sigma Notation",
+                  desc: "Using formal mathematical shorthand for summations.",
+                  assign:
+                    "Write the sum of squares from 1 to 10 in sigma notation.",
+                },
+                {
+                  name: "Binomial Theorem Expansion",
+                  desc: "Expanding (a + b)^n using Pascal's Triangle.",
+                  assign: "Expand (x + 2)^4 using binomial coefficients.",
+                },
+              ],
+            },
+            {
+              name: "Wave 3: Advanced Trigonometry and Analytic Geometry",
+              description:
+                "Mastering trigonometric identities, periodic modeling, and coordinate proofs.",
+              sessions: [
+                {
+                  name: "The Unit Circle in Radians",
+                  desc: "Defining trig functions for all angles on a 0-2pi scale.",
+                  assign: "Find the exact values of sin(2pi/3) and cos(7pi/6).",
+                },
+                {
+                  name: "Pythagorean Identities",
+                  desc: "Using sin² + cos² = 1 to simplify proofs.",
+                  assign: "Simplify (1 - sin²)/cos.",
+                },
+                {
+                  name: "Addition and Subtraction Formulas",
+                  desc: "Expanding sin(A+B) and cos(A-B).",
+                  assign: "Find the exact value of sin(75 degrees).",
+                },
+                {
+                  name: "Double and Half-Angle Formulas",
+                  desc: "Manipulating angles for algebraic simplification.",
+                  assign: "If sin(x) = 3/5, find sin(2x).",
+                },
+                {
+                  name: "Solving Trig Equations",
+                  desc: "Finding multiple solutions within specific domains.",
+                  assign: "Solve 2cos(x) + 1 = 0 for 0 < x < 2pi.",
+                },
+                {
+                  name: "Periodic Modeling",
+                  desc: "Using sine waves for tide and sound wave analysis.",
+                  assign:
+                    "Write a sine function to model a tide with a 4m range.",
+                },
+                {
+                  name: "Advanced Loci and Transformations",
+                  desc: "Finding the path of points following geometric rules.",
+                  assign:
+                    "Sketch the locus of points equidistant from a point and a line.",
+                },
+                {
+                  name: "Advanced Circles",
+                  desc: "Equation of circles and tangency in coordinate geometry.",
+                  assign:
+                    "Find the equation of a circle tangent to the x-axis at (3,0).",
+                },
+                {
+                  name: "Vectors in 3D Space",
+                  desc: "Intro to magnitude and direction in 3 dimensions.",
+                  assign: "Find the magnitude of vector [2, 3, 6].",
+                },
+                {
+                  name: "Dot Product and Angle Between Vectors",
+                  desc: "Using vector algebra to find spatial relationships.",
+                  assign:
+                    "Calculate the angle between vectors [1,0] and [1,1].",
+                },
+              ],
+            },
+            {
+              name: "Wave 4: Calculus - Differentiation Mastery",
+              description:
+                "Establishing the foundations of limits and the formal mechanics of finding rates of change.",
+              sessions: [
+                {
+                  name: "Introduction to Limits",
+                  desc: "Analyzing behavior as values approach a point.",
+                  assign:
+                    "Evaluate the limit of (x^2 - 1)/(x - 1) as x approaches 1.",
+                },
+                {
+                  name: "Limits to Infinity",
+                  desc: "Identifying end behavior of functions.",
+                  assign:
+                    "Find the limit of (3x^2+2)/(x^2-5) as x goes to infinity.",
+                },
+                {
+                  name: "Continuity and Differentiability",
+                  desc: "Proving a function is smooth and unbroken.",
+                  assign:
+                    "Check the continuity of a piecewise function at its junction.",
+                },
+                {
+                  name: "Derivative from First Principles",
+                  desc: "Using the limit definition of a derivative.",
+                  assign:
+                    "Find the derivative of x^2 using the formal limit definition.",
+                },
+                {
+                  name: "Power, Sum, and Difference Rules",
+                  desc: "Standard shortcuts for polynomial differentiation.",
+                  assign: "Differentiate f(x) = 4x^5 - 3x^2 + 7.",
+                },
+                {
+                  name: "Product and Quotient Rules",
+                  desc: "Differentiating combined functions.",
+                  assign: "Differentiate y = (x^2)sin(x).",
+                },
+                {
+                  name: "The Chain Rule",
+                  desc: "Differentiating composite 'inner/outer' functions.",
+                  assign: "Find dy/dx for y = (3x^2 + 1)^4.",
+                },
+                {
+                  name: "Differentiating Transcendental Functions",
+                  desc: "Rules for e^x, ln(x), and trig derivatives.",
+                  assign: "Differentiate y = e^(2x)cos(x).",
+                },
+                {
+                  name: "Implicit Differentiation",
+                  desc: "Finding slopes for non-functions (circles/ellipses).",
+                  assign: "Find dy/dx for x^2 + y^2 = 25.",
+                },
+                {
+                  name: "Second Derivatives and Concavity",
+                  desc: "Analyzing the 'rate of the rate' of change.",
+                  assign: "Find f''(x) for f(x) = x^3 - 5x.",
+                },
+              ],
+            },
+            {
+              name: "Wave 5: Applications of Calculus",
+              description:
+                "Using differentiation and integration to solve optimization, motion, and area problems.",
+              sessions: [
+                {
+                  name: "Stationary Points (Max/Min)",
+                  desc: "Using derivatives to find peaks and valleys.",
+                  assign: "Find local extrema for y = x^3 - 3x.",
+                },
+                {
+                  name: "Optimization in Design",
+                  desc: "Solving for maximum/minimum efficiency.",
+                  assign:
+                    "Find dimensions for a box with max volume and fixed surface area.",
+                },
+                {
+                  name: "Kinematics: Displacement to Acceleration",
+                  desc: "Applying calculus to physics of motion.",
+                  assign: "Given s(t), find acceleration at t=3.",
+                },
+                {
+                  name: "Related Rates",
+                  desc: "Solving for rates that depend on other variables.",
+                  assign:
+                    "How fast is a shadow moving as a person walks away from a lamp?",
+                },
+                {
+                  name: "Indefinite Integrals",
+                  desc: "Finding the anti-derivative and the constant C.",
+                  assign: "Integrate f(x) = 3x^2 + 4x.",
+                },
+                {
+                  name: "Fundamental Theorem of Calculus",
+                  desc: "Using definite integrals to find net change.",
+                  assign: "Evaluate the integral of x^2 from 0 to 3.",
+                },
+                {
+                  name: "Integration by Substitution",
+                  desc: "Using u-substitution for complex integrals.",
+                  assign: "Solve the integral of 2x(x^2+1)^3 dx.",
+                },
+                {
+                  name: "Area Under a Curve",
+                  desc: "Calculating the geometric space bounded by functions.",
+                  assign: "Find the area under y = sin(x) from 0 to pi.",
+                },
+                {
+                  name: "Area Between Two Curves",
+                  desc: "Using subtraction of integrals.",
+                  assign: "Find the area enclosed by y = x^2 and y = x.",
+                },
+                {
+                  name: "Volumes of Revolution",
+                  desc: "Calculating 3D volume by rotating a 2D area.",
+                  assign:
+                    "Find the volume of y = sqrt(x) rotated around the x-axis.",
+                },
+              ],
+            },
+            {
+              name: "Wave 6: Advanced Statistics and STEM Prep",
+              description:
+                "Mastering probability distributions, hypothesis testing, and pre-university modeling.",
+              sessions: [
+                {
+                  name: "Binomial Distribution",
+                  desc: "Modeling success/failure probability in fixed trials.",
+                  assign: "Find the probability of 7 heads in 10 coin flips.",
+                },
+                {
+                  name: "The Normal Distribution Curve",
+                  desc: "Using Z-scores and standard deviation for population analysis.",
+                  assign:
+                    "Find the percentage of scores above 130 if mean is 100.",
+                },
+                {
+                  name: "Linear Regression and Correlation",
+                  desc: "Predicting values using the least-squares method.",
+                  assign: "Calculate the r-value for height vs weight data.",
+                },
+                {
+                  name: "Hypothesis Testing Fundamentals",
+                  desc: "Understanding null hypotheses and p-values.",
+                  assign:
+                    "Test a claim about a coin's fairness based on 100 flips.",
+                },
+                {
+                  name: "Chi-Squared Independence Test",
+                  desc: "Analyzing relationships between categorical data.",
+                  assign: "Test if gender and subject choice are independent.",
+                },
+                {
+                  name: "Compound Interest and Annuities",
+                  desc: "Applying geometric series to long-term finance.",
+                  assign: "Calculate future value of a $200 monthly deposit.",
+                },
+                {
+                  name: "Mortgages and Loan Logic",
+                  desc: "Calculating monthly payments and total interest paid.",
+                  assign: "Find the monthly payment on a $300k loan at 4%.",
+                },
+                {
+                  name: "Mathematical Induction",
+                  desc: "Formal proof method for series and divisibility.",
+                  assign: "Prove the sum of first n integers using induction.",
+                },
+                {
+                  name: "University Entrance Prep: Part A",
+                  desc: "Solving advanced problems in Algebra and Trig.",
+                  assign:
+                    "Complete Section 1 of a University Entrance past paper.",
+                },
+                {
+                  name: "Capstone: The Grand Math Finale",
+                  desc: "Synthesis of Calculus, Trig, and Data in a final project.",
+                  assign:
+                    "Present a mathematical model of a physical system (e.g., bridge stress).",
+                },
+              ],
+            },
+          ],
+        },
+      ];
+
+      function loadCourse(index) {
+        // Update Tabs
+        const buttons = document.querySelectorAll(".tab-btn");
+        buttons.forEach((btn, i) =>
+          btn.classList.toggle("active", i === index)
+        );
+
+        const course = curriculumData[index] || curriculumData[0];
+        const container = document.getElementById("curriculum-view");
+
+        let html = `
+            <div class="course-header">
+                <h2 style="color: var(--dark-purple)">${course.name}</h2>
+                <p style="color: var(--text-muted)">${course.description}</p>
+            </div>
+        `;
+
+        course.waves.forEach((wave, wIndex) => {
+          html += `
+                <div class="wave-item" id="wave-${wIndex}">
+                    <div class="wave-trigger" onclick="toggleWave(${wIndex})">
+                        <div class="wave-title-group">
+                            <h3>${wave.name}</h3>
+                            <p style="font-size: 0.8rem; color: var(--text-muted)">${
+                              wave.sessions.length
+                            } Sessions • ${wave.description}</p>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="wave-content">
+                        <div class="session-grid">
+                            ${wave.sessions
+                              .map(
+                                (s, sIndex) => `
+                                <div class="session-card">
+                                    <h4>${sIndex + 1}. ${s.name}</h4>
+                                    <p>${s.desc}</p>
+                                    <div class="assignment-box">
+                                        <i class="fas fa-tasks"></i>
+                                        <span><strong>Assignment:</strong> ${
+                                          s.assign
+                                        }</span>
+                                    </div>
+                                </div>
+                            `
+                              )
+                              .join("")}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      function toggleWave(index) {
+        const item = document.getElementById(`wave-${index}`);
+        item.classList.toggle("active");
+      }
+
+      // Initialize with first course
+      window.onload = () => loadCourse(0);
+    </script>
+  </body>
+</html>
